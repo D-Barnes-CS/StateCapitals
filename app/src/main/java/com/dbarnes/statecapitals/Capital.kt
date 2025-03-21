@@ -1,6 +1,6 @@
 package com.dbarnes.statecapitals
 //class header, including primary constructor
-class Capital(state : String, capitalCity : String) {
+data class Capital(val state: String, val capitalCity: String) {
     //properties
     var state : String = ""
         get() = field

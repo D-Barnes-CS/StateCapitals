@@ -7,37 +7,24 @@ import android.util.Log
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding : ActivityMainBinding
-    private lateinit var stateList: ArrayList<Capital>
+    private lateinit var binding: ActivityMainBinding
+    private val viewModel: CapitalViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val rawDataArray = resources.getStringArray(R.array.states)
-        var stateName: String
-        var capitolName: String
-        var stringArray: List<String>
-        var capital: Capital
-        stateList = ArrayList<Capital>()
 
-        for (state in rawDataArray) {
-            stringArray = state.split(",")
-            stateName = stringArray[0]
-            capitolName = stringArray[1]
-            //create instance of Capital
-            capital = Capital(stateName, capitolName)
-            stateList.add(capital)
-        }
-        var capitalObject = stateList.get(Random.nextInt(stateList.size))
-        var messageString = "${capitalObject.capitalCity} " +
-                "is the capital of ${capitalObject.state}"
-        binding.capitalInfo.setText(messageString)
+        displayRandomStateCapital()
 
         binding.nextButton.setOnClickListener {
-            capitalObject = stateList.get(Random.nextInt(stateList.size))
-            messageString = "${capitalObject.capitalCity} " +
-                    "is the capital of ${capitalObject.state}"
-            binding.capitalInfo.setText(messageString)
+            displayRandomStateCapital()
         }
+    }
+
+    private fun displayRandomStateCapital() {
+        val randomCapital = viewModel.getRandomStateCapital()
+        var messageString = "${randomCapital.capitalCity} " +
+                "is the capital of ${randomCapital.state}"
+        binding.capitalInfo.text = messageString
     }
 }
