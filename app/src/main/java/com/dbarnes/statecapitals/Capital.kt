@@ -7,6 +7,7 @@ import kotlin.random.Random
 data class Capital(val state: String, val capitalCity: String)
 //https://developer.android.com/topic/libraries/architecture/viewmodel
 class CapitalViewModel : ViewModel() {
+    //https://www.baeldung.com/kotlin/make-list-of-objects#using-listof
     private val stateList = listOf(
         Capital("Alabama", "Montgomery"),
         Capital("Alaska", "Juneau"),
